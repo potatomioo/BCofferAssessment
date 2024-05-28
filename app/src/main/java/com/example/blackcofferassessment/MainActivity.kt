@@ -27,9 +27,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
@@ -53,6 +57,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -68,6 +73,7 @@ import com.example.blackcofferassessment.ui.theme.LightOcean
 import com.example.blackcofferassessment.ui.theme.OceanBlue
 import com.example.blackcofferassessment.ui.theme.PurpleGrey40
 import com.example.blackcofferassessment.ui.theme.ReddishBrown
+import com.example.blackcofferassessment.ui.theme.bottomFrames
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -120,7 +126,14 @@ fun MainScreen() {
                 profileScore = 85f
             )
         ))
-        bottom()
+        bottom(sec = listOf(
+                bottomFrame(Title = "Explore", id = Icons.Filled.Info),
+                bottomFrame(Title = "Contact", id = Icons.Filled.AccountBox),
+                bottomFrame(Title = "Details", id = Icons.Filled.DateRange),
+                bottomFrame(Title = "Notify", id = Icons.Filled.Notifications),
+                bottomFrame(Title = "Profile", id = Icons.Filled.Person)
+            )
+        )
     }
 }
 
@@ -460,7 +473,9 @@ fun SlideItem(
 }
 
 @Composable
-fun bottom() {
+fun bottom(
+    sec : List<bottomFrames>
+) {
     Row (
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -468,11 +483,9 @@ fun bottom() {
             .fillMaxSize()
             .background(DeepBlue)
     ){
-        bottomFrame(Title = "Explore", id = Icons.Filled.Info)
-        bottomFrame(Title = "Contact", id = Icons.Filled.AccountBox)
-        bottomFrame(Title = "Explore", id = )
-        bottomFrame(Title = "Explore", id = Icons.Filled.Info)
-        bottomFrame(Title = "Explore", id = Icons.Filled.Info)
+        for(i in sec){
+            bottomFrame(Title = i.Title, id = i.id)
+        }
     }
 }
 
@@ -487,6 +500,7 @@ fun bottomFrame(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(10.dp)
+            .clickable { }
     ){
         Icon(imageVector = id,
             contentDescription = "Icon",
