@@ -12,6 +12,6 @@ data class InviteCard(
 )
 
 data class bottomFrames(
-    val Title : String,
+    val base : String,
     val id : ImageVector
 )
